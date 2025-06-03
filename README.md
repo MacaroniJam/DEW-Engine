@@ -8,6 +8,8 @@
 
 - For now, we will focus on Windows and OpenGl but we are still abstract for future aspects.
 
+- We want to build our engine into a DLL and make an exe. After that, we link our engine to the exe file.
+
 ## Elements of our Game Engine
 - [Entry Point](#entry-point)
 - [Application Layer](#application-layer)
