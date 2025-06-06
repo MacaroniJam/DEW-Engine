@@ -10,6 +10,11 @@
 
 - We want to build our engine into a DLL and make an exe. After that, we link our engine to the exe file.
 
+- Output Directory: $(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\ So this file path, specifically bin stores all of our stuff, including binaries, libraries and project files.
+- Intermediate Directory: $(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\ So this file path is for older files like obj files that are created after compilation.
+
+- Sandbox will be our .exe and DEWEngine will be our .dll
+
 ## Elements of our Game Engine
 - [Entry Point](#entry-point)
 - [Application Layer](#application-layer)
