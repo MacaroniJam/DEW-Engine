@@ -30,3 +30,7 @@
 - [Physics](#physics)
 - [File I/O](#file-i/o)
 
+  ## Entry Point
+  **Notes**
+  - Creating a DEWEngine.h to be used by DEWEngine Applications
+  - EntryPoint.h creates the app by calling the CreateApplication() function in SanboxApp and it will call the Run() function inside Application.h that will execute the Run function in Application.cpp. After its used has lasted, it will be deleted by EntryPoint.h.
