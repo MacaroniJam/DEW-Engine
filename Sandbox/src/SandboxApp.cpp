@@ -13,6 +13,6 @@ public:
 
 };
 
-DEWEngine::Application* CreateApplication() {
+DEWEngine::Application* DEWEngine::CreateApplication() {
 	return new SandBox();
 }
