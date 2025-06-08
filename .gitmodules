@@ -1,0 +1,3 @@
+[submodule "DEWEngine/vendor/spdlog"]
+	path = DEWEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
