@@ -15,7 +15,9 @@
 
 - Sandbox will be our .exe and DEWEngine will be our .dll
 
-- For Logging we will be adding the [spdlog](https://github.com/gabime/spdlog) as a submodule. All third parties libraries will be in a folder called "vendor" in DEWEngine folder.
+- For Logging, we will add the [spdlog](https://github.com/gabime/spdlog) as a submodule. All third-party libraries will be in the "vendor" folder in the DEWEngine folder.
+
+- We made the log messages function as Macros to give us the ability to strip the code from distribution builds.
 
 ## Elements of our Game Engine
 - [Entry Point](#entry-point)
