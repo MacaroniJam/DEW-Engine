@@ -8,15 +8,17 @@
 namespace DEWEngine {
 	class DEW_API Log
 	{
+
+	private:
+		static std::shared_ptr<spdlog::logger> s_CoreLogger; // Core logger for the engine
+		static std::shared_ptr<spdlog::logger> s_ClientLogger; // Client logger for the application
+
 	public:
 		static void Init();
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
-	private:
-		static std::shared_ptr<spdlog::logger> s_CoreLogger; // Core logger for the engine
-		static std::shared_ptr<spdlog::logger> s_ClientLogger; // Client logger for the application
 	};
 
 

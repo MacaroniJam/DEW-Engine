@@ -21,6 +21,7 @@ project "DEWEngine"
 	location "DEWEngine" -- Folder where the project files will be generated
 	kind "SharedLib" -- Type of project, in this case a DLL
 	language "C++"
+	buildoptions {"/utf-8"} -- Set the character set to UTF-8 for source files
 
 	-- Output directory for the compiled binaries
 		-- This will create a directory structure like bin/Debug-Windows-x64/DEWEngine
@@ -35,12 +36,12 @@ project "DEWEngine"
 	}
 
 	-- Include directories for the project
-	include {
+	includedirs {
 		"%{prj.name}/vendor/spdlog/include" -- Include the spdlog library for logging
 	}
 
-	filter "system:Windows"
-		cppdialect "C++17" -- Use C++17 compile flag as standard 
+	filter "system:windows"
+		cppdialect "C++17" -- Use C++17 compile flag as standard
 		staticruntime "On" -- Linking runtime libraries staticly
 		systemversion "latest" -- Use the latest version of the Windows SDK, uses another SDK if line is not used
 
@@ -73,3 +74,54 @@ project "DEWEngine"
 	filter "configurations:Dist"
 		defines "DEW_DIST" -- Define the DEW_DIST preprocessor directive for Dist configuration
 		optimize "On" 
+
+
+
+
+project "Sandbox"
+	location "Sandbox"
+	kind "ConsoleApp" -- executable application
+	language "C++"
+	buildoptions {"/utf-8"}
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files{
+		"%{prj.name}/src/**.h", 
+		"%{prj.name}/src/**.cpp" 
+	}
+
+	
+	includedirs {
+		"DEWEngine/vendor/spdlog/include",
+		"DEWEngine/src"
+	}
+
+	links{
+		"DEWEngine" -- Link the Sandbox project with the DEWEngine library
+	}
+
+	filter "system:windows"
+		cppdialect "C++17" 
+		staticruntime "On" 
+		systemversion "latest" 
+
+		
+		defines{
+			"DEW_PLATFORM_WINDOWS"
+		}
+
+	
+	filter "configurations:Debug"
+		defines "DEW_DEBUG" 
+		symbols "On" 
+
+	filter "configurations:Release"
+		defines "DEW_RELEASE" 
+		optimize "On" 
+
+	filter "configurations:Dist"
+		defines "DEW_DIST" 
+		optimize "On" 
+
