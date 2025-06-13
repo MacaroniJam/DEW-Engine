@@ -1,6 +1,7 @@
 -- This file is used to generate project files for the DEWEngine using Premake5.
 workspace "DEWEngine"
 	architecture "x64" -- Target platform
+	startproject "Sandbox" -- The project that will be opened by default when the workspace is loaded
 
 	configurations{
 		"Debug", -- Full on debug code that we use to develop everything developed
@@ -38,6 +39,7 @@ project "DEWEngine"
 	-- Include directories for the project
 	includedirs {
 		"%{prj.name}/vendor/spdlog/include" -- Include the spdlog library for logging
+		,"%{prj.name}/src" -- Include the src directory of the DEWEngine project
 	}
 
 	filter "system:windows"

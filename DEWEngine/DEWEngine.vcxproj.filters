@@ -4,6 +4,9 @@
     <Filter Include="DEWEngine">
       <UniqueIdentifier>{3B58E862-A7C2-9CD9-F000-4E7F5CAA7A2E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEWEngine\Events">
+      <UniqueIdentifier>{BF13B7ED-AB0C-D63F-D43E-BBC4C096B54B}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DEWEngine.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\DEWEngine\EntryPoint.h">
       <Filter>DEWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\Events\ApplicationEvent.h">
+      <Filter>DEWEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\Events\Event.h">
+      <Filter>DEWEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\Events\KeyEvent.h">
+      <Filter>DEWEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\Events\MouseEvent.h">
+      <Filter>DEWEngine\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\DEWEngine\Log.h">
       <Filter>DEWEngine</Filter>
