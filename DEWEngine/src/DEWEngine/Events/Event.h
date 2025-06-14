@@ -31,4 +31,53 @@ namespace DEWEngine {
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
+	// EventCategory is used to categorize events, which can be useful for filtering events
+	// we use enum instead of enum class to allow bitwise operations
+	// Bits are used as events can belong to multiple categories
+	// so bitwise operations are used to combine categories like AND operations (minus the bits) and OR operations (plus the bits)
+	enum EventCategory {
+		None = 0,
+		EventCategoryApplication = BIT(0),
+		EvenCategoryInput = BIT(1),
+		EventCategoryKeyboard = BIT(2),
+		EventCategoryMouse = BIT(3),
+		EventCategoryMouseButton = BIT(4)
+	};
+
+
+	// ## is used to concatenate tokens in macros.
+	// For example, GetStaticType(MouseButtonPressed) will become EventType::MouseButtonPressed
+
+	// # is used to convert a token to a string literal
+	// For example, GetName(MouseButtonPressed) will become "MouseButtonPressed"
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+								virtual EventType GetEventType() const override { return GetStaticType(); }\
+								virtual const char* GetName() const override { return #type; }
+
+	// Category flags are the bitwise representation of the event categories
+#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+
+	
+	
+	class DEW_API Event {
+
+		friend class EventDispatcher;
+
+	protected:
+		bool m_Handled = false; // Indicates if the event has been handled
+
+	public:
+		virtual EventType GetEventType() const = 0;
+		virtual const char* GetName() const = 0;
+		virtual int GetCategoryFlags() const = 0;
+		virtual std::string ToString() const { return GetName(); }
+
+		// Checks if the event belongs to a specific category
+		inline bool IsInCategory(EventCategory category) {
+			return GetCategoryFlags() & category; // Bitwise AND operation to check if the category is set
+		}
+	};
+
+
+
 }
