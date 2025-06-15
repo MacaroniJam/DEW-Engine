@@ -6,10 +6,10 @@
 	// Trying to build the DLL for DEW Engine
 	#ifdef DEW_BUILD_DLL
 
-		// If we are building the DLL, we need to export the symbols
+		// If we are building the DLL, we need to export the symbols from the DLL
 		#define DEW_API __declspec(dllexport)
 	#else
-		// If we are not building the DLL, we need to import the symbols
+		// If we are not building the DLL, we need to import the symbols from the DLL
 		#define DEW_API __declspec(dllimport)
 	#endif
 

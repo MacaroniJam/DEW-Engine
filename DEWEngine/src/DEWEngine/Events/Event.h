@@ -58,7 +58,10 @@ namespace DEWEngine {
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 	
+
 	
+	// --- DEWEngine Events System -----	
+	// Event is the base class for all events in the DEWEngine framework.
 	class DEW_API Event {
 
 		friend class EventDispatcher;
@@ -78,6 +81,32 @@ namespace DEWEngine {
 		}
 	};
 
+	// EventDispatcher is a utility class that helps in dispatching events to the appropriate handlers.
+	class EventDispatcher {
+
+		template<typename T> // T must be a derived class of Event
+		using EventFn = std::function<bool(T&)>; // Function type for event handlers that take an event of type T and return a bool
+
+	private:
+		Event& m_Event; // Reference to the event being dispatched
+
+
+	public:
+		// : m_Event(event) = m_Event =event; in function body
+		EventDispatcher(Event& event) 
+			: m_Event(event) {
+
+		}
+
+		template<typename T>
+		bool Dispatch(EventFn<T> func) {
+			if (m_Event.GetEventType() == T::GetStaticType()) {
+				m_Event.m_Handled = func(*T*) & m_Event);
+				return true;
+			}
+			return false;
+		}
+	};
 
 
 }
