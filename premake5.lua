@@ -22,7 +22,7 @@ project "DEWEngine"
 	location "DEWEngine" -- Folder where the project files will be generated
 	kind "SharedLib" -- Type of project, in this case a DLL
 	language "C++"
-	buildoptions {"/utf-8"} -- Set the character set to UTF-8 for source files
+	buildoptions {"/utf-8"} 
 
 	-- Output directory for the compiled binaries
 		-- This will create a directory structure like bin/Debug-Windows-x64/DEWEngine
@@ -33,13 +33,13 @@ project "DEWEngine"
 
 	files{
 		"%{prj.name}/src/**.h", -- Recursively search for (which mean **) and include all header files in the src directory
-		"%{prj.name}/src/**.cpp" -- Recursively search for and include all cpp files in the src directory"
+		"%{prj.name}/src/**.cpp" -- Recursively search for and include all cpp files in the src directory
 	}
 
 	-- Include directories for the project
 	includedirs {
-		"%{prj.name}/vendor/spdlog/include" -- Include the spdlog library for logging
-		,"%{prj.name}/src" -- Include the src directory of the DEWEngine project
+		"%{prj.name}/src" -- Include the src directory of the DEWEngine project
+		,"%{prj.name}/vendor/spdlog/include" -- Include the spdlog library for logging
 	}
 
 	filter "system:windows"

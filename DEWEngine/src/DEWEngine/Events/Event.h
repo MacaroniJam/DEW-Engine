@@ -25,7 +25,7 @@ namespace DEWEngine {
 		AppTick, AppUpdate, AppRender,
 
 		// Keyboard events
-		KeyPressed, KeyReleased, KeyTyped,
+		KeyPressed, KeyReleased,
 
 		// Mouse events
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
@@ -38,7 +38,7 @@ namespace DEWEngine {
 	enum EventCategory {
 		None = 0,
 		EventCategoryApplication = BIT(0),
-		EvenCategoryInput = BIT(1),
+		EventCategoryInput = BIT(1),
 		EventCategoryKeyboard = BIT(2),
 		EventCategoryMouse = BIT(3),
 		EventCategoryMouseButton = BIT(4)
@@ -85,14 +85,17 @@ namespace DEWEngine {
 	class EventDispatcher {
 
 		template<typename T> // T must be a derived class of Event
-		using EventFn = std::function<bool(T&)>; // Function type for event handlers that take an event of type T and return a bool
+
+		//std::function<bool(T&)> is a standard function that takes a T reference (any event) and returns a bool
+			//std::function is used to store a function that can be passed in as a parameter
+		using EventFn = std::function<bool(T&)>; 
 
 	private:
 		Event& m_Event; // Reference to the event being dispatched
 
 
 	public:
-		// : m_Event(event) = m_Event =event; in function body
+		// : m_Event(event) = m_Event = event; in function body
 		EventDispatcher(Event& event) 
 			: m_Event(event) {
 
@@ -100,13 +103,28 @@ namespace DEWEngine {
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func) {
+
+			// Check if the event type matches the type T
 			if (m_Event.GetEventType() == T::GetStaticType()) {
-				m_Event.m_Handled = func(*T*) & m_Event);
+
+				// Cast event to the appropriate function and return its handled results
+					// &m_Event takes address of m_Event creating Event*
+					// (T*)... casts the Event* to T* (Treat mem location as though it was T)
+					// *(...) dereferences the T* to get T&
+				m_Event.m_Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;
 		}
 	};
 
-
+	// Exists to allow printing of events to the console or logs
+	inline std::ostream& operator<<(std::ostream& os, const Event& e) {
+		return os << e.ToString(); // Outputs the string representation of the event
+	}
+	
+	/*
+	// spdlog updates prevents previous method from working, here is another method to format events as strings
+	inline std::string format_as(const Event& e) { return e.ToString(); }
+	*/
 }
