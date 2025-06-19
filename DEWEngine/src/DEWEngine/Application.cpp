@@ -1,3 +1,4 @@
+#include "dewpch.h"
 #include "Application.h"
 
 #include "DEWEngine/Events/ApplicationEvent.h"

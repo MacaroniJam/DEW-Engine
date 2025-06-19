@@ -31,6 +31,9 @@ project "DEWEngine"
 
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}") -- Intermediate directory for object files
 
+	pchheader "dewpch.h" -- Precompiled header file
+	pchsource "DEWEngine/src/dewpch.cpp" -- Source file for the precompiled header
+
 	files{
 		"%{prj.name}/src/**.h", -- Recursively search for (which mean **) and include all header files in the src directory
 		"%{prj.name}/src/**.cpp" -- Recursively search for and include all cpp files in the src directory

@@ -2,10 +2,6 @@
 
 #include "DEWEngine/Core.h"
 
-// Headers are temporary and will be removed once precompiled headers are implemented
-#include <string>
-#include <functional>
-
 namespace DEWEngine {
 	// Events are currently blocking, meaning when an event occurs it immediately gets dispatched and must be dealt with
 	// right then and there. 
