@@ -7,6 +7,12 @@
     <Filter Include="DEWEngine\Events">
       <UniqueIdentifier>{BF13B7ED-AB0C-D63F-D43E-BBC4C096B54B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEWEngine\Platform">
+      <UniqueIdentifier>{EF06E953-DBEA-A9A9-444B-A4FC304E942B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEWEngine\Platform\Windows">
+      <UniqueIdentifier>{2930CA5D-1540-762E-7EF9-DA4C6A2865C7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DEWEngine.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\DEWEngine\Log.h">
       <Filter>DEWEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsWindow.h">
+      <Filter>DEWEngine\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\Window.h">
+      <Filter>DEWEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\dewpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\DEWEngine\Log.cpp">
       <Filter>DEWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DEWEngine\Platform\Windows\WindowsWindow.cpp">
+      <Filter>DEWEngine\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\dewpch.cpp" />
   </ItemGroup>
