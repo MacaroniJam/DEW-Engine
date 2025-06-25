@@ -14,7 +14,6 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "DEWEngine/Log.h"
 
 #ifdef DEW_PLATFORM_WINDOWS
 	#include <Windows.h>

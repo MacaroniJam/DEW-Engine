@@ -1,6 +1,5 @@
 #pragma once
 
-#include "dewpch.h"
 #include "DEWEngine/Core.h"
 
 namespace DEWEngine {

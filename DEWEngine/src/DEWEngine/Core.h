@@ -15,18 +15,9 @@
 
 #else
 	#error "DEW Engine only supports Windows platform for now."
-#endif
 
-//Used for debugging purposes
-#ifdef DEW_ENABLE_ASSERTS
-	// Checks a condition x and logs a message. If it fails, a break point is added for debugging.
-	#define DEW_ASSERT(x, ...) { if (!(x)) { DEW_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
-	#define DEW_CORE_ASSERT(x, ...) { if (!(x)) { DEW_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
-#else
-	#define DEW_ASSERT(x, ...)
-	#define DEW_CORE_ASSERT(x, ...)
 #endif
 
 // Shift the binary representation of 1 to the left by x positions
 // 1 = 01 (1), 1 << 0 = 10 (2), 1 << 1 = 100 (4), 1 << 2 = 1000 (8) etc.
-#define BIT(x) (1 << x) 
+#define BIT(x) ( 1 << x) 
