@@ -4,5 +4,6 @@
 ## .exes/Sub-Modules
 - Logging System: [spdlog](https://github.com/gabime/spdlog)
 - Project Generation: [Premake](https://github.com/premake/premake-core)
+- Window: [GLFW](https://github.com/MacaroniJam/glfw)
 
 
