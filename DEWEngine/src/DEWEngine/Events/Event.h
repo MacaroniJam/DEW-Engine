@@ -115,13 +115,14 @@ namespace DEWEngine {
 		}
 	};
 
+	/*
 	// Exists to allow printing of events to the console or logs
 	inline std::ostream& operator<<(std::ostream& os, const Event& e) {
 		return os << e.ToString(); // Outputs the string representation of the event
 	}
+	*/
 	
-	/*
 	// spdlog updates prevents previous method from working, here is another method to format events as strings
 	inline std::string format_as(const Event& e) { return e.ToString(); }
-	*/
+	
 }
