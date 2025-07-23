@@ -1,8 +1,10 @@
 #pragma once
 #include "Core.h"
-#include "Events/Event.h"
-#include "DEWEngine/Events/ApplicationEvent.h"
+
 #include "Window.h"
+#include "DEWEngine/LayerStack.h"
+#include "DEWEngine/Events/Event.h"
+#include "DEWEngine/Events/ApplicationEvent.h"
 
 
 namespace DEWEngine {
@@ -16,6 +18,8 @@ namespace DEWEngine {
 		std::unique_ptr<Window> m_Window; //Unique pointer means only this class owns the window instance
 		bool m_Running = true;
 
+		LayerStack m_LayerStack;
+
 	public:
 		Application();
 		virtual ~Application();
@@ -23,6 +27,9 @@ namespace DEWEngine {
 		void OnEvent(Event& e);
 
 		void Run();
+
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 
 	};
 

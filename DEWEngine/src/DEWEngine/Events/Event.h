@@ -63,10 +63,9 @@ namespace DEWEngine {
 
 		friend class EventDispatcher;
 
-	protected:
-		bool m_Handled = false; // Indicates if the event has been handled
-
 	public:
+		bool Handled = false; // Indicates if the event has been handled
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -108,7 +107,7 @@ namespace DEWEngine {
 					// &m_Event takes address of m_Event creating Event*
 					// (T*)... casts the Event* to T* (Treat mem location as though it was T)
 					// *(...) dereferences the T* to get T&
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

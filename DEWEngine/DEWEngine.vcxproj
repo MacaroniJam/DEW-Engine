@@ -84,7 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -111,7 +111,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -139,7 +139,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -163,6 +163,8 @@
     <ClInclude Include="src\DEWEngine\Events\Event.h" />
     <ClInclude Include="src\DEWEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\DEWEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\DEWEngine\Layer.h" />
+    <ClInclude Include="src\DEWEngine\LayerStack.h" />
     <ClInclude Include="src\DEWEngine\Log.h" />
     <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\DEWEngine\Window.h" />
@@ -170,6 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DEWEngine\Application.cpp" />
+    <ClCompile Include="src\DEWEngine\Layer.cpp" />
+    <ClCompile Include="src\DEWEngine\LayerStack.cpp" />
     <ClCompile Include="src\DEWEngine\Log.cpp" />
     <ClCompile Include="src\DEWEngine\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\dewpch.cpp">

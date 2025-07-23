@@ -85,14 +85,17 @@ project "DEWEngine"
 
 	filter "configurations:Debug"
 		defines "DEW_DEBUG" -- Define the DEW_DEBUG preprocessor directive for Debug configuration
+		buildoptions "/MDd" -- Link against the multi-threaded debug DLL runtime library
 		symbols "On" -- Enable debug symbols for the Debug configuration
 
 	filter "configurations:Release"
 		defines "DEW_RELEASE" -- Define the DEW_RELEASE preprocessor directive for Release configuration
+		buildoptions "/MD" -- Link against the multi-threaded DLL runtime library
 		optimize "On" -- Enable optimizations for the Release configuration
 
 	filter "configurations:Dist"
 		defines "DEW_DIST" -- Define the DEW_DIST preprocessor directive for Dist configuration
+		buildoptions "/MD" 
 		optimize "On" 
 
 
@@ -135,13 +138,16 @@ project "Sandbox"
 	
 	filter "configurations:Debug"
 		defines "DEW_DEBUG" 
+		buildoptions "/MDd"
 		symbols "On" 
 
 	filter "configurations:Release"
-		defines "DEW_RELEASE" 
+		defines "DEW_RELEASE"
+		buildoptions "/MD"
 		optimize "On" 
 
 	filter "configurations:Dist"
-		defines "DEW_DIST" 
+		defines "DEW_DIST"
+		buildoptions "/MD"
 		optimize "On" 
 

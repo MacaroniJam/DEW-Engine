@@ -37,6 +37,12 @@
     <ClInclude Include="src\DEWEngine\Events\MouseEvent.h">
       <Filter>DEWEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\DEWEngine\Layer.h">
+      <Filter>DEWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DEWEngine\LayerStack.h">
+      <Filter>DEWEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\DEWEngine\Log.h">
       <Filter>DEWEngine</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DEWEngine\Application.cpp">
+      <Filter>DEWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DEWEngine\Layer.cpp">
+      <Filter>DEWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DEWEngine\LayerStack.cpp">
       <Filter>DEWEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\DEWEngine\Log.cpp">

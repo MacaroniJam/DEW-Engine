@@ -21,6 +21,16 @@ namespace DEWEngine {
 		// Clean up resources
 	}
 
+	void Application::PushLayer(Layer* layer) {
+		// Add a layer to the application
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* overlay) {
+		// Add an overlay to the application
+		m_LayerStack.PushOverlay(overlay);
+	}
+
 	void Application::OnEvent(Event& e) {
 		//Handle Events
 		EventDispatcher dispatcher(e);
@@ -29,7 +39,14 @@ namespace DEWEngine {
 			//If the event is a certian type, call the specified function
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		DEW_CORE_TRACE("{0}", e);
+
+		//Layers are handled in reverse order
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
+
+			(*--it)->OnEvent(e);
+
+			if (e.Handled) break; // If the event is handled, stop processing further layers
+		}
 	}
 
 	void Application::Run() {
@@ -38,6 +55,9 @@ namespace DEWEngine {
 			glClearColor(1, 0, 1, 1); // Set clear color to pink
 			glClear(GL_COLOR_BUFFER_BIT); // Clear the screen using the specified color
 
+			for (Layer* layer : m_LayerStack) {
+				layer->OnUpdate(); // Update each layer in the stack
+			}
 			m_Window->OnUpdate();
 		}
 	}
