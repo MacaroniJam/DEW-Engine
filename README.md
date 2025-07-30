@@ -5,6 +5,6 @@
 - Logging System: [spdlog](https://github.com/gabime/spdlog)
 - Project Generation: [Premake](https://github.com/premake/premake-core)
 - Window: [GLFW](https://github.com/MacaroniJam/glfw)
-- Modern OpenGL: [GLAD](https://glad.dav1d.de/)
+- Modern OpenGL: [Glad](https://glad.dav1d.de/)
 
 
