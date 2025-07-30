@@ -4,7 +4,7 @@
 
 #include "DEWEngine/Log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace DEWEngine {
 
@@ -15,6 +15,7 @@ namespace DEWEngine {
 
 		m_Window = std::unique_ptr<Window>(Window::Create()); // Deletes the window when Application terminates
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
 	}
 
 	Application::~Application() {

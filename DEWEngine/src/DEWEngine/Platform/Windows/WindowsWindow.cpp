@@ -5,6 +5,8 @@
 #include "DEWEngine/Events/MouseEvent.h"
 #include "DEWEngine/Events/KeyEvent.h"
 
+#include <glad/glad.h> // Modern OpenGL loader, must be included before GLFW to avoid conflicts
+
 
 namespace DEWEngine {
 
@@ -49,6 +51,11 @@ namespace DEWEngine {
 			// The context holds all the info needed to render graphics on the window
 			// OpenGL is thread specifc, so to draw a window from a specific thread, we need to make its context current
 		glfwMakeContextCurrent(m_Window); 
+
+		// Most platforms initially provide only OpenGL 1.1 (especially Windows). 
+		// To use modern OpenGL features, you must load function pointers yourself at runtime.
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress); // Load OpenGL functions using glad
+		DEW_CORE_ASSERT(status, "Failed to initialize Glad!"); // Check if glad was initialized successfully
 
 		// Set the user pointer to access window data so we can use its Event callback functions
 		glfwSetWindowUserPointer(m_Window, &m_Data); 
