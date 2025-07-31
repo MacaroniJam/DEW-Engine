@@ -6,5 +6,5 @@
 - Project Generation: [Premake](https://github.com/premake/premake-core)
 - Window: [GLFW](https://github.com/MacaroniJam/glfw)
 - Modern OpenGL Loader: [Glad](https://glad.dav1d.de/)
-- GUI Lib: [ImGui](https://github.com/MacaroniJam/imgui)
+- GUI: [ImGui](https://github.com/MacaroniJam/imgui)
 
