@@ -18,6 +18,7 @@ class SandBox : public DEWEngine::Application {
 public:
 	SandBox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new DEWEngine::ImGuiLayer());
 	}
 
 	~SandBox() {

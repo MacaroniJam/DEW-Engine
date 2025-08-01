@@ -10,8 +10,12 @@ namespace DEWEngine {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1) // Macro to bind event functions to the application instance
 
+	Application* Application::s_Instance = nullptr; // no active instance of Application yet
+
 	Application::Application() {
 		// Initialize the application
+		DEW_CORE_ASSERT(!s_Instance, "Application already exists!"); // If not null, an instance already exists
+		s_Instance = this; // Set singleton instance to current instance
 
 		m_Window = std::unique_ptr<Window>(Window::Create()); // Deletes the window when Application terminates
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
@@ -25,11 +29,13 @@ namespace DEWEngine {
 	void Application::PushLayer(Layer* layer) {
 		// Add a layer to the application
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach(); // Call OnAttach for the layer to initialize it
 	}
 
-	void Application::PushOverlay(Layer* overlay) {
+	void Application::PushOverlay(Layer* layer) {
 		// Add an overlay to the application
-		m_LayerStack.PushOverlay(overlay);
+		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e) {

@@ -9,10 +9,12 @@
 
 namespace DEWEngine {
 
-	class DEW_API Application
+	class DEW_API Application //Singleton
 	{
 
 	private:
+		static Application* s_Instance;
+
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window; //Unique pointer means only this class owns the window instance
@@ -31,6 +33,9 @@ namespace DEWEngine {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		inline Window& GetWindow() { return *m_Window; }
+
+		inline static Application& Get() { return *s_Instance; }
 	};
 
 	// To be defined in CLIENT

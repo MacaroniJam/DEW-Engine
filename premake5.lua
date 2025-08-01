@@ -21,10 +21,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	-- Creating Lua lookup table for IncludeDir
 IncludeDir = {} -- create a table known as IncludeDir
 IncludeDir["GLFW"] = "DEWEngine/vendor/GLFW/include" -- Added GLFW to table, key = "GLFW", value = file path
-IncludeDir["Glad"] = "DEWEngine/vendor/Glad/include" 
+IncludeDir["Glad"] = "DEWEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "DEWEngine/vendor/imgui"
 
 include "DEWEngine/vendor/GLFW" -- Include GLFW premake file. Its file contents are copied and pasted to this file
 include "DEWEngine/vendor/Glad"
+include "DEWEngine/vendor/imgui"
 
 
 project "DEWEngine"
@@ -53,12 +55,14 @@ project "DEWEngine"
 		"%{prj.name}/src", -- Include the src directory of the DEWEngine project
 		"%{prj.name}/vendor/spdlog/include", -- Include the spdlog library for logging
 		"%{IncludeDir.GLFW}", -- Include the GLFW library directory from the IncludeDir table
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links{
 		"GLFW", -- Link the GLFW library to the DEWEngine project
 		"Glad",
+		"ImGui",
 		"opengl32.lib" -- Link the OpenGL library, which is required for rendering
 	}
 

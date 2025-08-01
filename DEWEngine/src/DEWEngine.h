@@ -4,6 +4,8 @@
 #include "DEWEngine/Layer.h" // For layer management
 #include "DEWEngine/Log.h" // For logging functionality
 
+#include "DEWEngine/ImGui/ImGuiLayer.h" // For ImGui integration
+
 
 
 //--- Entry Point ---

@@ -4,3 +4,6 @@
 [submodule "DEWEngine/vendor/GLFW"]
 	path = DEWEngine/vendor/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "DEWEngine/vendor/imgui"]
+	path = DEWEngine/vendor/imgui
+	url = https://github.com/MacaroniJam/imgui
