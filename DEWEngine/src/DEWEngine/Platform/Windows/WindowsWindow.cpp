@@ -119,6 +119,15 @@ namespace DEWEngine {
 
 		});
 
+		// Key Type Event (for text input, like typing in a text box)
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
+
 
 
 		// -- Mouse Events --

@@ -3,9 +3,13 @@
 
 #include "imgui.h"
 #include "DEWEngine/Platform/OpenGL/ImGuiOpenGLRenderer.h"
-#include "GLFW/glfw3.h" //Temporary: should use DEWEngine KeyCodes
 
 #include "DEWEngine/Application.h"
+
+//Temporary
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 
 namespace DEWEngine {
 
@@ -20,6 +24,35 @@ namespace DEWEngine {
 
 	}
 
+	//Keyboard Configs 
+	//**TEMPORARY**: should use DEWEngine KeyCodes
+	ImGuiKey KeyMap(int keycode) {
+		switch (keycode) {
+		case GLFW_KEY_TAB: return ImGuiKey_Tab;
+		case GLFW_KEY_LEFT: return ImGuiKey_LeftArrow;
+		case GLFW_KEY_RIGHT: return ImGuiKey_RightArrow;
+		case GLFW_KEY_UP: return ImGuiKey_UpArrow;
+		case GLFW_KEY_DOWN: return ImGuiKey_DownArrow;
+		case GLFW_KEY_PAGE_UP: return ImGuiKey_PageUp;
+		case GLFW_KEY_PAGE_DOWN: return ImGuiKey_PageDown;
+		case GLFW_KEY_HOME: return ImGuiKey_Home;
+		case GLFW_KEY_END: return ImGuiKey_End;
+		case GLFW_KEY_INSERT: return ImGuiKey_Insert;
+		case GLFW_KEY_DELETE: return ImGuiKey_Delete;
+		case GLFW_KEY_BACKSPACE: return ImGuiKey_Backspace;
+		case GLFW_KEY_SPACE: return ImGuiKey_Space;
+		case GLFW_KEY_ENTER: return ImGuiKey_Enter;
+		case GLFW_KEY_ESCAPE: return ImGuiKey_Escape;
+		case GLFW_KEY_A: return ImGuiKey_A;
+		case GLFW_KEY_C: return ImGuiKey_C;
+		case GLFW_KEY_V: return ImGuiKey_V;
+		case GLFW_KEY_X: return ImGuiKey_X;
+		case GLFW_KEY_Y: return ImGuiKey_Y;
+		case GLFW_KEY_Z: return ImGuiKey_Z;
+		default: return ImGuiKey_None; // Return None for unmapped keys
+		}
+	}
+
 	void ImGuiLayer::OnAttach()
 	{
 		ImGui::CreateContext(); // Create ImGui context
@@ -31,29 +64,7 @@ namespace DEWEngine {
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors; // Enable mouse cursors
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos; // Enable setting mouse position
 
-		//Keyboard Configs 
-		//**TEMPORARY**: should use DEWEngine KeyCodes
-		io.AddKeyEvent(ImGuiKey_Tab, GLFW_KEY_TAB);
-		io.AddKeyEvent(ImGuiKey_LeftArrow, GLFW_KEY_LEFT);
-		io.AddKeyEvent(ImGuiKey_RightArrow, GLFW_KEY_RIGHT);
-		io.AddKeyEvent(ImGuiKey_UpArrow, GLFW_KEY_UP);
-		io.AddKeyEvent(ImGuiKey_DownArrow, GLFW_KEY_DOWN);
-		io.AddKeyEvent(ImGuiKey_PageUp, GLFW_KEY_PAGE_UP);
-		io.AddKeyEvent(ImGuiKey_PageDown, GLFW_KEY_PAGE_DOWN);
-		io.AddKeyEvent(ImGuiKey_Home, GLFW_KEY_HOME);
-		io.AddKeyEvent(ImGuiKey_End, GLFW_KEY_END);
-		io.AddKeyEvent(ImGuiKey_Insert, GLFW_KEY_INSERT);
-		io.AddKeyEvent(ImGuiKey_Delete, GLFW_KEY_DELETE);
-		io.AddKeyEvent(ImGuiKey_Backspace, GLFW_KEY_BACKSPACE);
-		io.AddKeyEvent(ImGuiKey_Space, GLFW_KEY_SPACE);
-		io.AddKeyEvent(ImGuiKey_Enter, GLFW_KEY_ENTER);
-		io.AddKeyEvent(ImGuiKey_Escape, GLFW_KEY_ESCAPE);
-		io.AddKeyEvent(ImGuiKey_A, GLFW_KEY_A);
-		io.AddKeyEvent(ImGuiKey_C, GLFW_KEY_C);
-		io.AddKeyEvent(ImGuiKey_V, GLFW_KEY_V);
-		io.AddKeyEvent(ImGuiKey_X, GLFW_KEY_X);
-		io.AddKeyEvent(ImGuiKey_Y, GLFW_KEY_Y);
-		io.AddKeyEvent(ImGuiKey_Z, GLFW_KEY_Z);
+		
 
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
@@ -97,8 +108,110 @@ namespace DEWEngine {
 
 	void ImGuiLayer::OnEvent(Event& event)
 	{
+		// If the event matches the event type of a specific handler, call that handler
+		EventDispatcher dispatcher(event);
+
+		// Dispatch mouse events
+		dispatcher.Dispatch<MouseButtonPressedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
+		dispatcher.Dispatch<MouseButtonReleasedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
+		dispatcher.Dispatch<MouseMovedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
+		dispatcher.Dispatch<MouseScrolledEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
+
+		// Dispatch keyboard events
+		dispatcher.Dispatch<KeyPressedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
+		dispatcher.Dispatch<KeyReleasedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
+		dispatcher.Dispatch<KeyTypedEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
+
+		// Dispatch window events
+		dispatcher.Dispatch<WindowResizeEvent>(DEW_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
+
+	}
+
+	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddMouseButtonEvent(e.GetMouseButton(), true); // true for pressed
+
+		return false; // Return false to allow other layers to process the event
+	}
+
+	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddMouseButtonEvent(e.GetMouseButton(), false); // false for released
+
+		return false; 
+
+	}
+
+	bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddMousePosEvent(e.GetX(), e.GetY());
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddMouseWheelEvent(e.GetXOffset(), e.GetYOffset());
+
+		return false;
+
+	}
+
+	bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuiKey key = KeyMap(e.GetKeyCode()); // Map GLFW key to ImGui key
+		io.AddKeyEvent(key, true); // true for pressed
+		GLFWwindow* window = glfwGetCurrentContext();
+
+		//Modifier keys
+		io.AddKeyEvent(ImGuiMod_Ctrl, (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) 
+			|| (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS));
+
+		io.AddKeyEvent(ImGuiMod_Shift, (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) 
+			|| (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS));
+
+		io.AddKeyEvent(ImGuiMod_Alt, (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS) 
+			|| (glfwGetKey(window, GLFW_KEY_RIGHT_ALT) == GLFW_PRESS));
+
+		// Super key (Windows key on Windows, Command key on macOS)
+		io.AddKeyEvent(ImGuiMod_Super, (glfwGetKey(window, GLFW_KEY_LEFT_SUPER) == GLFW_PRESS) 
+			|| (glfwGetKey(window, GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS)); 
 
 
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuiKey key = KeyMap(e.GetKeyCode());
+		io.AddKeyEvent(key, false); // false for released
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddInputCharacter((unsigned int)e.GetKeyCode());
+		
+		return false;
+	}
+
+	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f); // temporary configuration
+		glViewport(0, 0, e.GetWidth(), e.GetHeight());
+
+
+		return false;
 	}
 
 }

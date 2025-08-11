@@ -22,7 +22,7 @@ namespace DEWEngine {
 		AppTick, AppUpdate, AppRender,
 
 		// Keyboard events
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 
 		// Mouse events
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
