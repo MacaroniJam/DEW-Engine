@@ -18,6 +18,10 @@
 #endif
 
 //Used for debugging purposes
+#ifdef DEW_DEBUG
+	#define DEW_ENABLE_ASSERTS // Enable asserts in debug mode
+#endif
+
 #ifdef DEW_ENABLE_ASSERTS
 	// Checks a condition x and logs a message. If it fails, a break point is added for debugging.
 	#define DEW_ASSERT(x, ...) { if (!(x)) { DEW_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}

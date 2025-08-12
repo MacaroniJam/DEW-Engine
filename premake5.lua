@@ -34,6 +34,7 @@ project "DEWEngine"
 	kind "SharedLib" -- Type of project, in this case a DLL
 	language "C++"
 	buildoptions {"/utf-8"} 
+	staticruntime "off" -- Use the dynamic runtime library, which is the default for DLLs
 
 	-- Output directory for the compiled binaries
 		-- This will create a directory structure like bin/Debug-Windows-x64/DEWEngine
@@ -69,7 +70,6 @@ project "DEWEngine"
 
 	filter "system:windows"
 		cppdialect "C++17" -- Use C++17 compile flag as standard
-		staticruntime "On" -- Linking runtime libraries staticly
 		systemversion "latest" -- Use the latest version of the Windows SDK, uses another SDK if line is not used
 
 		-- Define preprocessor directives for Windows platform and DLL export
@@ -93,17 +93,17 @@ project "DEWEngine"
 
 	filter "configurations:Debug"
 		defines "DEW_DEBUG" -- Define the DEW_DEBUG preprocessor directive for Debug configuration
-		buildoptions "/MDd" -- Link against the multi-threaded debug DLL runtime library
+		runtime "Debug" -- Link against the multi-threaded debug DLL runtime library
 		symbols "On" -- Enable debug symbols for the Debug configuration
 
 	filter "configurations:Release"
 		defines "DEW_RELEASE" -- Define the DEW_RELEASE preprocessor directive for Release configuration
-		buildoptions "/MD" -- Link against the multi-threaded DLL runtime library
+		runtime "Release" -- Link against the multi-threaded DLL runtime library
 		optimize "On" -- Enable optimizations for the Release configuration
 
 	filter "configurations:Dist"
 		defines "DEW_DIST" -- Define the DEW_DIST preprocessor directive for Dist configuration
-		buildoptions "/MD" 
+		runtime "Release" 
 		optimize "On" 
 
 
@@ -114,6 +114,7 @@ project "Sandbox"
 	kind "ConsoleApp" -- executable application
 	language "C++"
 	buildoptions {"/utf-8"}
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -135,7 +136,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17" 
-		staticruntime "On" 
 		systemversion "latest" 
 
 		
@@ -146,16 +146,16 @@ project "Sandbox"
 	
 	filter "configurations:Debug"
 		defines "DEW_DEBUG" 
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On" 
 
 	filter "configurations:Release"
 		defines "DEW_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On" 
 
 	filter "configurations:Dist"
 		defines "DEW_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On" 
 
