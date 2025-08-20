@@ -1,10 +1,11 @@
 #include "dewpch.h"
 #include "Application.h"
 
-
 #include "DEWEngine/Log.h"
 
 #include <glad/glad.h>
+
+#include "Input.h"
 
 namespace DEWEngine {
 
@@ -65,6 +66,9 @@ namespace DEWEngine {
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(); // Update each layer in the stack
 			}
+
+			auto [x, y] = Input::GetMousePosition();
+			DEW_CORE_TRACE("Mouse Position: ({0}, {1})", x, y);
 			m_Window->OnUpdate();
 		}
 	}

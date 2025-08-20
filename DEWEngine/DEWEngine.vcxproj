@@ -164,6 +164,7 @@
     <ClInclude Include="src\DEWEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\DEWEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\DEWEngine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\DEWEngine\Input.h" />
     <ClInclude Include="src\DEWEngine\Layer.h" />
     <ClInclude Include="src\DEWEngine\LayerStack.h" />
     <ClInclude Include="src\DEWEngine\Log.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\DEWEngine\Window.h" />
     <ClInclude Include="src\dewpch.h" />
+    <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DEWEngine\Application.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="src\dewpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\DEWEngine\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

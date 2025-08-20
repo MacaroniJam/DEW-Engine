@@ -40,6 +40,8 @@ namespace DEWEngine {
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
+		virtual void* GetNativeWindow() const = 0; // Returns a pointer to the native window handle
+
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
 
