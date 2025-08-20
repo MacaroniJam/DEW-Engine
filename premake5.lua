@@ -24,9 +24,11 @@ IncludeDir["GLFW"] = "DEWEngine/vendor/GLFW/include" -- Added GLFW to table, key
 IncludeDir["Glad"] = "DEWEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "DEWEngine/vendor/imgui"
 
-include "DEWEngine/vendor/GLFW" -- Include GLFW premake file. Its file contents are copied and pasted to this file
-include "DEWEngine/vendor/Glad"
-include "DEWEngine/vendor/imgui"
+group "Dependencies" -- Create a group in the project explorer for Dependencies
+	include "DEWEngine/vendor/GLFW" -- Include GLFW premake file. Its file contents are copied and pasted to this file
+	include "DEWEngine/vendor/Glad"
+	include "DEWEngine/vendor/imgui"
+group "" -- Close the Dependencies group, so that subsequent projects are not included in this group
 
 
 project "DEWEngine"
@@ -84,9 +86,11 @@ project "DEWEngine"
 
 			-- Copy the compiled DLL to the Sandbox project directory
 				-- This uses the COPY command to copy the built DLL to the Sandbox project directory
-				-- The %{cfg.buildtarget.relpath} token is used to get the relative path of the built target
-				-- The "../bin/" .. outputdir .. "/Sandbox" is the target directory where the DLL will be copied
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+				-- The %{cfg.buildtarget.relpath} is a placeholder for the relative path of the build target
+				-- The \" beside of relpath is used to escape double quotes and adds a space
+				-- The "../bin/" .. outputdir .. "/Sandbox/\"" is the destination directory where the DLL will be copied
+				-- 
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	
