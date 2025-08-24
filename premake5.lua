@@ -23,6 +23,7 @@ IncludeDir = {} -- create a table known as IncludeDir
 IncludeDir["GLFW"] = "DEWEngine/vendor/GLFW/include" -- Added GLFW to table, key = "GLFW", value = file path
 IncludeDir["Glad"] = "DEWEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "DEWEngine/vendor/imgui"
+IncludeDir["glm"] = "DEWEngine/vendor/glm"
 
 group "Dependencies" -- Create a group in the project explorer for Dependencies
 	include "DEWEngine/vendor/GLFW" -- Include GLFW premake file. Its file contents are copied and pasted to this file
@@ -50,7 +51,9 @@ project "DEWEngine"
 
 	files{
 		"%{prj.name}/src/**.h", -- Recursively search for (which mean **) and include all header files in the src directory
-		"%{prj.name}/src/**.cpp" -- Recursively search for and include all cpp files in the src directory
+		"%{prj.name}/src/**.cpp", -- Recursively search for and include all cpp files in the src directory
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	-- Include directories for the project
@@ -59,7 +62,8 @@ project "DEWEngine"
 		"%{prj.name}/vendor/spdlog/include", -- Include the spdlog library for logging
 		"%{IncludeDir.GLFW}", -- Include the GLFW library directory from the IncludeDir table
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links{
@@ -131,7 +135,8 @@ project "Sandbox"
 	
 	includedirs {
 		"DEWEngine/vendor/spdlog/include",
-		"DEWEngine/src"
+		"DEWEngine/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links{

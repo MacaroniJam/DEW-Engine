@@ -8,3 +8,6 @@
 [submodule "DEWEngine/vendor/imgui"]
 	path = DEWEngine/vendor/imgui
 	url = https://github.com/MacaroniJam/imgui
+[submodule "DEWEngine/vendor/glm"]
+	path = DEWEngine/vendor/glm
+	url = https://github.com/g-truc/glm
