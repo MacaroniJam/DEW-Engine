@@ -7,4 +7,5 @@
 - Window: [GLFW](https://github.com/MacaroniJam/glfw)
 - Modern OpenGL Loader: [Glad](https://glad.dav1d.de/)
 - GUI: [ImGui](https://github.com/MacaroniJam/imgui)
+- Math Library: [GLM](https://glm.g-truc.net/)
 
