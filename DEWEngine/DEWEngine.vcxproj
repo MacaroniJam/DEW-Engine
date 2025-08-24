@@ -165,9 +165,11 @@
     <ClInclude Include="src\DEWEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\DEWEngine\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\DEWEngine\Input.h" />
+    <ClInclude Include="src\DEWEngine\KeyCodes.h" />
     <ClInclude Include="src\DEWEngine\Layer.h" />
     <ClInclude Include="src\DEWEngine\LayerStack.h" />
     <ClInclude Include="src\DEWEngine\Log.h" />
+    <ClInclude Include="src\DEWEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\DEWEngine\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\DEWEngine\Window.h" />

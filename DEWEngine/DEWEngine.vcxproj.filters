@@ -67,6 +67,8 @@
     <ClInclude Include="src\dewpch.h" />
     <ClInclude Include="src\DEWEngine\Input.h" />
     <ClInclude Include="src\DEWEngine\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\DEWEngine\KeyCodes.h" />
+    <ClInclude Include="src\DEWEngine\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DEWEngine\Application.cpp">

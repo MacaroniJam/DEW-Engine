@@ -67,8 +67,7 @@ namespace DEWEngine {
 				layer->OnUpdate(); // Update each layer in the stack
 			}
 
-			auto [x, y] = Input::GetMousePosition();
-			DEW_CORE_TRACE("Mouse Position: ({0}, {1})", x, y);
+			
 			m_Window->OnUpdate();
 		}
 	}
